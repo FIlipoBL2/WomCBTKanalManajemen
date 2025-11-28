@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Video List (Table Version)</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      padding: 20px;
+      background-color: #fff;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .logo img {
+      height: 30px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .profile-circle {
+      width: 30px;
+      height: 30px;
+      background-color: #8e44ad;
+      color: white;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 30px;
+      font-weight: bold;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    thead {
+      background-color: #f2f2f2;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+
+    td.title-cell {
+      text-align: left;
+    }
+
+    .thumbnail {
+      width: 100px;
+      height: 70px;
+      background-color: #999;
+      margin: auto;
+      border-radius: 6px;
+    }
+
+    .edit-button {
+      margin-top: 5px;
+      padding: 4px 10px;
+      font-size: 12px;
+      background-color: #555;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    /* Popup overlay */
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0, 0, 0, 0.4);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .popup-content {
+      background: white;
+      padding: 20px;
+      border: 2px solid black;
+      width: 300px;
+    }
+
+    .popup-content label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    .popup-content input,
+    .popup-content textarea {
+      width: 100%;
+      padding: 5px;
+      margin-top: 4px;
+    }
+
+    .popup-actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+
+    .popup-actions button {
+      padding: 6px 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo"><img src="logo_youtube.png" alt="YouTube Logo" /></div>
+    <div class="actions">
+      <img src="notif-icon.png" width="24" />
+      <div class="profile-circle">B</div>
+    </div>
+  </header>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Thumbnail</th>
+        <th>Title</th>
+        <th>Views</th>
+        <th>Likes</th>
+        <th>Dislikes</th>
+        <th>Comments</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><div class="thumbnail"></div></td>
+        <td class="title-cell">
+          My First Video<br>
+          <button class="edit-button" onclick="openPopup('My First Video')">Edit</button>
+        </td>
+        <td>0</td><td>0</td><td>0</td><td>0</td>
+      </tr>
+      <tr>
+        <td><div class="thumbnail" style="background-color:#444;"></div></td>
+        <td class="title-cell">
+          Second Video<br>
+          <button class="edit-button" onclick="openPopup('Second Video')">Edit</button>
+        </td>
+        <td>0</td><td>0</td><td>0</td><td>0</td>
+      </tr>
+      <tr>
+        <td><div class="thumbnail"></div></td>
+        <td class="title-cell">
+          Another Clip<br>
+          <button class="edit-button" onclick="openPopup('Another Clip')">Edit</button>
+        </td>
+        <td>0</td><td>0</td><td>0</td><td>0</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Popup -->
+  <div class="popup-overlay" id="popup">
+    <div class="popup-content">
+      <label for="title">Title:</label>
+      <input type="text" id="title" />
+
+      <label for="description">Description:</label>
+      <textarea id="description" rows="3"></textarea>
+
+      <div class="popup-actions">
+        <button onclick="closePopup()">Cancel</button>
+        <button onclick="savePopup()">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const popup = document.getElementById('popup');
+    const titleInput = document.getElementById('title');
+    const descriptionInput = document.getElementById('description');
+
+    function openPopup(currentTitle) {
+      titleInput.value = currentTitle;
+      descriptionInput.value = '';
+      popup.style.display = 'flex';
+    }
+
+    function closePopup() {
+      popup.style.display = 'none';
+    }
+
+    function savePopup() {
+      closePopup();
+    }
+  </script>
+
+</body>
+</html>
