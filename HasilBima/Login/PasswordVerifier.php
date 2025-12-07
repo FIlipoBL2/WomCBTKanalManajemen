@@ -1,39 +1,39 @@
 <?php
     session_start();
-    $serverName = "MEATJERKY\SQLEXPRESS"; //serverName\instanceName
-    
-    $connectionInfo = array( "Database"=>"master");
-    $conn = sqlsrv_connect( $serverName, $connectionInfo);
-    $channelId = $_POST["idChannel"];
-    $realPass="not real";
+    require "../../conn.php";
     $myquery = "
       SELECT pass
       FROM Kanal
       WHERE idKanal = ?";
-      $stmt = sqlsrv_query($conn, $myquery, array( $channelId ));
-      if ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC) ) {
-        $realPass = (string)$row["pass"];
-      } 
+      $stmt = $conn->prepare($myquery);
+      $stmt->bind_param("s", $_POST["idKanal"]);   // "s" = string
+      $stmt->execute();
+
+      $result = $stmt->get_result();
+      $realPass = "not real";
+      $row = mysqli_fetch_assoc($result );
+      if (!is_null($row)) $realPass = (string)$row["pass"];
       if ($realPass=="not real"&& !empty($_POST["pass"])) {
-        $channelId == "V". (string)rand();
-        $realPass == $_POST["pass"];
+        $channelId = "V". (string)rand(0,90011);
+        $realPass = $_POST["pass"];
         $myquery = "
         Insert Into Kanal (idKanal, isGroup, pass)
         VALUES('$channelId', 0, $realPass)";
-      
-        sqlsrv_query($conn, $myquery);
+        $stmt = $conn->prepare($myquery);
+        $stmt->execute();
         $myquery = "
         Insert Into Pengguna
-        VALUES('$email, '$channelId')";
-      
-        sqlsrv_query($conn, $myquery);
+        VALUES(? , ?)";
+        $stmt = $conn->prepare($myquery);
+        $stmt->bind_param("ss",  $_POST["email"],$channelId);
+        $stmt->execute();
       }
     
     if (!empty($_POST["pass"]) && $realPass == $_POST["pass"]) {
         $_SESSION["channelId"] = $channelId;
         $_SESSION["gambarnya"] = $_POST["gambarnya"];
         $_SESSION["email"] = $_POST["email"];
-        header("Location: /devi/LandingPage.php");
+        header("Location: ../../devi/LandingPage.php");
         exit();
     }
 ?>
@@ -50,6 +50,8 @@
 </head>
 <body>
   <div class="form-container">
+    
+    <h1><?php echo $_POST["email"]??"gak ada email";?></h1>
     <h1>Please enter your password</h1>
     <?php
       if (empty($_POST["pass"]))

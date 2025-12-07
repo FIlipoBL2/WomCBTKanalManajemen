@@ -23,11 +23,11 @@
       </a>
     </div>
     <div class="actions">
-      <a href="/HasilBima/Notif/NotifReject.php">
+      <a href="../HasilBima/Notif/NotifReject.php">
         <img src="notif-icon.png" alt="Notifications" />
       </a>
       <div class="profile-circle">
-        <a href="<?php if (!isset($_SESSION["email"])) echo "/HasilBima/Login/EmailRequest.php"; else echo "/Eric/Profile/Profile.php"?>">
+        <a href="<?php if (!isset($_SESSION["email"])) echo "../HasilBima/Login/EmailRequest.php"; else echo "../Eric/Profile/Profile.php"?>">
           <img src = "<?php echo $imgSrc?>">
         </a>
         
