@@ -1,9 +1,5 @@
 <?php
-    $serverName = "MEATJERKY\SQLEXPRESS"; //serverName\instanceName
-    
-    $connectionInfo = array( "Database"=>"master");
-    $conn = sqlsrv_connect( $serverName, $connectionInfo);
-    
+    require "../../conn.php";
 ?>
 
 <!DOCTYPE html>
@@ -30,16 +26,21 @@
       FROM pengguna
         WHERE email = ?
         )";
-        $stmt = sqlsrv_query($conn, $myquery, array( $email ));
+        $stmt = $conn->prepare($myquery);
+        $stmt->bind_param("s", $email);   // "s" = string
+        $stmt->execute();
+
+        $result = $stmt->get_result();
         $targetImg = 'default.jpg';
         $channelId = 'null';
-        if ( $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC) ) {
+        if ( $row = mysqli_fetch_assoc($result )) {
           $targetImg = $row['gambar'];
           $channelId = $row['idKanal'];
         } 
         echo "<img src='/$targetImg' id='$channelId' alt='User Image'><br>";
       ?>
     </div>
+    <h1>Your Group Channels</h1>
     <div id="groupChannels">
       <?php
       $myquery = "
@@ -49,9 +50,13 @@
 	    SELECT idKanal
 	    FROM PosisiPenggunaGroup
 	    WHERE email = ?)";
-        $stmt = sqlsrv_query($conn, $myquery, array( $email ));
+      $stmt = $conn->prepare($myquery);
+      $stmt->bind_param("s", $email);   // "s" = string
+      $stmt->execute();
+
+      $result = $stmt->get_result();
         $found = false;
-        while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
+        while ($row = mysqli_fetch_assoc($result )) {
           $found = true;
           $imgPath = $row["gambar"];
           $channelId = $row["idKanal"];
@@ -59,7 +64,6 @@
           echo "<div><img src='/$imgPath' id='$channelId' alt='User Image'><br><h3>$channelName</h3></div>";
           echo $imgPath;
         }
-        sqlsrv_close($conn);
       ?>
     </div>
   </div>

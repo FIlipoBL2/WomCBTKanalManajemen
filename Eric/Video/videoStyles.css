@@ -1,0 +1,168 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  color: #0f0f0f;
+}
+
+header {
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 20px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.video-page {
+  display: flex;
+  flex-direction: row;
+  padding: 20px;
+  gap: 20px;
+}
+
+.video-main {
+  flex: 3;
+}
+
+.video-player video {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  background: black;
+}
+
+.uploader-info {
+  display: flex;
+  align-items: center;
+  margin: 15px 0;
+}
+
+.uploader-info img {
+  border-radius: 50%;
+  margin-right: 15px;
+  width: 50px;
+  height: 50px;
+}
+
+.uploader-info h4 {
+  margin: 0;
+}
+
+.subscribe {
+  margin-top: 5px;
+  padding: 6px 12px;
+  background-color: #cc0000;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.video-title {
+  margin-top: 10px;
+  font-size: 20px;
+}
+
+.video-actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.video-actions button {
+  background-color: #eee;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.video-sidebar {
+  flex: 1;
+}
+
+.video-sidebar h3 {
+  margin-top: 0;
+}
+
+.suggested-video {
+  display: flex;
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+
+.suggested-video img {
+  width: 160px;
+  height: 90px;
+  margin-right: 10px;
+  border-radius: 6px;
+}
+
+.suggested-video .title {
+  font-weight: bold;
+  margin: 0;
+}
+
+.suggested-video .views {
+  margin: 5px 0 0;
+  font-size: 13px;
+  color: #606060;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.logo img {
+  height: 30px;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  max-width: 500px;
+  margin: 0 20px;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+}
+
+.search-bar img {
+  width: 20px;
+  margin-left: -30px;
+  cursor: pointer;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.actions img {
+  width: 20px;
+}
+
+.profile-circle {
+  background-color: #8e44ad;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 30px;
+  font-weight: bold;
+}
+
+.profile-circle a {
+  color: white;
+  text-decoration: none;
+} 
