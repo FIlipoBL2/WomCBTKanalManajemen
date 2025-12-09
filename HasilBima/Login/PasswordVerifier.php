@@ -4,14 +4,14 @@
     $myquery = "
       SELECT pass
       FROM Kanal
-      WHERE idKanal = ?";
+      WHERE idKanal =( 
+        SELECT idKanal from pengguna where email=?)";
       $stmt = $conn->prepare($myquery);
-      $stmt->bind_param("s", $_POST["idKanal"]);   // "s" = string
+      $stmt->bind_param("s", $_POST["email"]);   // "s" = string
       $stmt->execute();
-
       $result = $stmt->get_result();
       $realPass = "not real";
-      $row = mysqli_fetch_assoc($result );
+      $row = mysqli_fetch_assoc($result);
       if (!is_null($row)) $realPass = (string)$row["pass"];
       if ($realPass=="not real"&& !empty($_POST["pass"])) {
         $channelId = "V". (string)rand(0,90011);
@@ -29,7 +29,7 @@
         $stmt->execute();
       }
     
-    if (!empty($_POST["pass"]) && $realPass == $_POST["pass"]) {
+    if (!empty($_POST["pass"]) && $realPass == (string) $_POST["pass"]) {
         $_SESSION["channelId"] = $channelId;
         $_SESSION["gambarnya"] = $_POST["gambarnya"];
         $_SESSION["email"] = $_POST["email"];

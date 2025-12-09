@@ -40,7 +40,7 @@
     <div class="video-main">
       <div class="video-player">
         <video controls>
-          <source src="<?php echo $_GET["idVideo"];?>" type="video/mp4">
+          <source src="../../<?php echo $_GET["idVideo"];?>" type="video/mp4">
           Your browser does not support HTML5 video.
         </video>
       </div>
